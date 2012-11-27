@@ -1,5 +1,5 @@
+// cc VideoInputFormat Read one video file as one split to feed to the mapper
 package cpsc551.videoprocessing.utils;
-// cc VideoInputFormat An InputFormat for reading a whole file as a record
 
 import java.io.IOException;
 import org.apache.hadoop.fs.*;

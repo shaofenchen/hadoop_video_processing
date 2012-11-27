@@ -1,5 +1,5 @@
+// cc VideoRecordReader RecordReader for decomposite the video to frames
 package cpsc551.videoprocessing.utils;
-// cc VideoRecordReader The RecordReader used by WholeFileInputFormat for reading a whole file as a record
 import java.io.IOException;
 import java.net.URI;
 

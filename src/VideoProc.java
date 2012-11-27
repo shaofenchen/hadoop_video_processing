@@ -1,4 +1,4 @@
-// cc VideoProc A MapReduce program for packaging a collection of small files as a single SequenceFile
+// cc VideoProc A MapReduce program for face detection from videos
 import java.io.IOException;
 
 import org.apache.hadoop.fs.Path;
@@ -51,7 +51,6 @@ public class VideoProc {
 	        // Preload the opencv_objdetect module to work around a known bug.
 	        Loader.load(opencv_objdetect.class);
 
-	        // We can "cast" Pointer objects by instantiating a new object of the desired class.
 	        CvHaarClassifierCascade classifier = new CvHaarClassifierCascade(cvLoad(classifierName));
 	        if (classifier.isNull()) {
 	            System.err.println("Error loading classifier file \"" + classifierName + "\".");
@@ -62,6 +61,7 @@ public class VideoProc {
 	        int height = grabbedImage.height();
 	        IplImage grayImage    = IplImage.create(width, height, IPL_DEPTH_8U, 1);
             cvCvtColor(grabbedImage, grayImage, CV_BGR2GRAY);
+            
             //face detection
             CvSeq faces = cvHaarDetectObjects(grayImage, classifier, storage,
                     1.1, 3, CV_HAAR_DO_CANNY_PRUNING);
