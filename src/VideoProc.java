@@ -2,24 +2,15 @@
 import java.io.IOException;
 
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.BytesWritable;
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.lib.IdentityReducer;
-import org.apache.hadoop.mapreduce.InputSplit;
+//import org.apache.hadoop.mapreduce.InputSplit;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.input.FileSplit;
+//import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
-import org.apache.hadoop.tools.rumen.JobBuilder;
-import org.apache.hadoop.util.Tool;
-import org.apache.hadoop.util.ToolRunner;
 
 import com.googlecode.javacpp.Loader;
-import com.googlecode.javacv.*;
 import com.googlecode.javacv.cpp.*;
 import com.googlecode.javacv.cpp.opencv_core.CvMemStorage;
 import com.googlecode.javacv.cpp.opencv_core.CvRect;
@@ -30,7 +21,6 @@ import com.googlecode.javacv.cpp.opencv_objdetect.CvHaarClassifierCascade;
 
 import static com.googlecode.javacv.cpp.opencv_core.*;
 import static com.googlecode.javacv.cpp.opencv_imgproc.*;
-import static com.googlecode.javacv.cpp.opencv_calib3d.*;
 import static com.googlecode.javacv.cpp.opencv_objdetect.*;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
 
@@ -44,14 +34,14 @@ public class VideoProc {
 		//haar classifier to be used
 		static String classifierName = "resource/haarcascade_frontalface_alt.xml";
 		
-		private Text filenameKey;
+		//private Text filenameKey;
 
 		@Override
 		protected void setup(Context context) throws IOException,
 				InterruptedException {
-			InputSplit split = context.getInputSplit();
-			Path path = ((FileSplit) split).getPath();
-			filenameKey = new Text(path.toString());
+			//InputSplit split = context.getInputSplit();
+			//Path path = ((FileSplit) split).getPath();
+			//filenameKey = new Text(path.toString());
 		}
 
 		@Override

@@ -1,3 +1,5 @@
+// JavaCV demo program from JavaCV site: http://code.google.com/p/javacv/
+//
 package cpsc551.videoprocessing.javacv;
 import com.googlecode.javacpp.Loader;
 import com.googlecode.javacv.*;

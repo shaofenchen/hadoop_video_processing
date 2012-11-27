@@ -85,21 +85,6 @@ class VideoRecordReader extends RecordReader<Text, Image> {
 				e.printStackTrace();
 			}
 			
-			//byte[] contents = new byte[(int) fileSplit.getLength()];
-//			Path file = fileSplit.getPath();
-//			String filename = file.getName();
-//			//String filepath_str = file.toString();
-//			FileSystem fs = file.getFileSystem(conf);
-//			tempFilepath = LocalTempPath + filename;
-//			fs.copyToLocalFile(file, new Path(tempFilepath));
-//			FSDataInputStream in = null;
-//			try {
-//				in = fs.open(file);
-//				IOUtils.readFully(in, contents, 0, contents.length);
-//				value.set(contents, 0, contents.length);
-//			} finally {
-//				IOUtils.closeStream(in);
-//			}
 			return true;
 		}
 		return false;
