@@ -18,6 +18,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import cpsc551.videoprocessing.utils.*;
 
 import com.googlecode.javacv.*;
+import com.googlecode.javacv.FrameGrabber.Exception;
 import com.googlecode.javacv.cpp.opencv_core.IplImage;
 import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
 
@@ -54,6 +55,7 @@ class VideoRecordReader extends RecordReader<Text, Image> {
         System.out.println(tempFilepath + filename);
         try {
 			grabber.start();
+			System.out.println("start of video:" + filename);
 			//IplImage grabbedImage = grabber.grab();
 			//cvSaveImage("/home/hduser/OutputFrames/image01.jpg", grabbedImage);
 		} catch (com.googlecode.javacv.FrameGrabber.Exception e) {
@@ -75,14 +77,23 @@ class VideoRecordReader extends RecordReader<Text, Image> {
 					this.frameCounter++;
 					
 					System.out.println(key.toString());
+					//cvSaveImage(key.toString(), grabbedImage);
 				}
 				else{
 					this.processed = true;
-					
+					System.out.println("end of video:" + filenameWithoutExt);
 					grabber.stop();
 				}
 			} catch (com.googlecode.javacv.FrameGrabber.Exception e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				this.processed = true;
+				try {
+					grabber.stop();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				System.out.println("end of video:" + filenameWithoutExt);
 			}
 			
 			return true;

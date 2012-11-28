@@ -1,6 +1,9 @@
 // cc VideoProc A MapReduce program for face detection from videos
 import java.io.IOException;
 
+import org.apache.hadoop.conf.Configurable;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
 //import org.apache.hadoop.mapreduce.InputSplit;
@@ -34,11 +37,18 @@ public class VideoProc {
 		//haar classifier to be used
 		static String classifierName = "resource/haarcascade_frontalface_alt.xml";
 		
+		private Configuration conf;
+		private Path outputPath;
 		//private Text filenameKey;
 
 		@Override
 		protected void setup(Context context) throws IOException,
 				InterruptedException {
+			conf = context.getConfiguration();
+			outputPath = FileOutputFormat.getOutputPath(context);
+			System.out.println(outputPath.toString());
+			//outputPath = context.getOutputFormatClass().get
+			//this.outputPath = conf.get
 			//InputSplit split = context.getInputSplit();
 			//Path path = ((FileSplit) split).getPath();
 			//filenameKey = new Text(path.toString());
@@ -76,6 +86,8 @@ public class VideoProc {
             if(faces.total() > 0){
             	context.write(key, value);
             	cvSaveImage(key.toString(), grabbedImage);
+            	FileSystem output_hdfs = outputPath.getFileSystem(conf);
+            	output_hdfs.copyFromLocalFile(new Path(key.toString()), outputPath);
             }
 			// context.write(filenameKey, value);
 		}
